@@ -1,5 +1,4 @@
 import type { Request, Response } from 'express';
-import TestModel from 'src/models/user';
 
 class PingController {
   static ping(_req: Request, res: Response): void {

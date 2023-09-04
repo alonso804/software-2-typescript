@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register ./src/index.ts",
-    "build": "tsc",
+    "build:clean": "rm -r ./dist; exit 0",
+    "build:tsc": "tsc --build && resolve-tspaths",
+    "build": "npm run build:clean && npm run build:tsc",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +28,7 @@
     "eslint-plugin-typescript-enum": "2.1.0",
     "eslint-recommended": "link:eslint-plugin-plugin:@typescript-eslint/eslint-recommended",
     "prettier": "3.0.3",
+    "resolve-tspaths": "0.8.15",
     "ts-node-dev": "2.0.0",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.2.2"

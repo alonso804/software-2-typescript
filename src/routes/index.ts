@@ -5,7 +5,7 @@ import type { Router } from 'express';
 import { glob } from 'glob';
 import { logger } from 'src/logger';
 
-const routeFiles = glob.sync('**/*.ts', { cwd: __dirname, ignore: '**/index.ts' });
+const routeFiles = glob.sync('**/*.{ts,js}', { cwd: __dirname, ignore: '**/index.{ts,js}' });
 
 const routes: { path: string; router: Router }[] = routeFiles.map((routeFile) => {
   return {
