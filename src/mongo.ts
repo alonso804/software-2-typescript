@@ -7,7 +7,7 @@ async function initMongo(): Promise<void> {
 
   while (!success) {
     try {
-      await connect('mongodb://localhost:27017/test');
+      await connect(process.env.MONGO_URI);
       logger.info(`Connected to '${connection.name}' database`);
       success = true;
     } catch (error) {

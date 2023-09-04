@@ -7,6 +7,7 @@ dotenv.config();
 
 const envVariablesSchema = z.object({
   PORT: z.string().regex(/^\d+$/).default('3000'),
+  MONGO_URI: z.string().url(),
 });
 
 const parsedEnvVariables = envVariablesSchema.safeParse(process.env);
@@ -14,15 +15,14 @@ const parsedEnvVariables = envVariablesSchema.safeParse(process.env);
 if (parsedEnvVariables.success) {
   process.env = parsedEnvVariables.data;
 } else {
-  logger.error('Invalid environment variables:');
+  logger.error(parsedEnvVariables.error.errors);
 
   throw new Error('Invalid environment variables');
 }
 
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
-    interface ProcessEnv extends z.infer<typeof envVariablesSchema> {}
+    interface ProcessEnv extends z.infer<typeof envVariablesSchema> { }
   }
 }
